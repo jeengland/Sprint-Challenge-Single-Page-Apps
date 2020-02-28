@@ -17,17 +17,17 @@ export default function CharacterList() {
   const [ query, setQuery ] = useState("");
   // API call
   useEffect(() => {
-    axios.get('https://cors-anywhere.herokuapp.com/https://rickandmortyapi.com/api/character/')
+    axios.get(`https://cors-anywhere.herokuapp.com/https://rickandmortyapi.com/api/character/?name=${query.toLowerCase()}`)
          .then((response) => {
            setData(response.data.results);
            setDisplay(response.data.results);
          })
-  }, [])
-  // Search function 
-  useEffect(() => {
-    const searchResults = data.filter((entry) => entry.name.toLowerCase().includes(query.toLowerCase()));
-    setDisplay(searchResults);
   }, [query])
+  // --- Legacy search function ---
+  // useEffect(() => {
+  //   const searchResults = data.filter((entry) => entry.name.toLowerCase().includes(query.toLowerCase()));
+  //   setDisplay(searchResults);
+  // }, [query])
   return (
     <React.Fragment>
       <SearchForm setQuery={setQuery} query={query}/>
