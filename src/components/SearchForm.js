@@ -1,10 +1,19 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
+import styled from '@emotion/styled';
 
-export default function SearchForm() {
- 
+
+const Search = styled.section`
+  margin-top: 2%;
+  display: flex;
+  justify-content: center;
+`
+
+export default function SearchForm(props) {
+  const [ search, setSearch ] = useState("")
   return (
-    <section className="search-form">
-     // Add a search form here
-    </section>
+    <Search className='search-form' >
+      <input type='text' value={search} onChange={(event) => setSearch(event.target.value)} placeholder='Search by name'/>
+      <button onClick={() => props.setQuery(search)}>Search</button>
+    </Search>
   );
 }
