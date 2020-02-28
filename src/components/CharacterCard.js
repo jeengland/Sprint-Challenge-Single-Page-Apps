@@ -33,7 +33,7 @@ export default function CharacterCard(props) {
       <img src={character.image} title={character.name} alt={`Character portrait of ${character.name}`}/>
       <div className='character-header'>
         <h2>{character.name}</h2>
-        {character.status === 'Dead' ? <i class='fas fa-skull'></i> : undefined}
+        {character.status === 'Dead' ? <i className='fas fa-skull'></i> : undefined}
       </div>
       <div className='character-stats'>
         <p>Species: {character.species}</p>

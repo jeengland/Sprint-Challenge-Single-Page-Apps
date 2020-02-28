@@ -13,14 +13,18 @@ const CardContainer = styled.section`
 
 export default function CharacterList() {
   const [ data, setData ] = useState([]);
-  const [ display, setDisplay ] = useState([]);
+  // const [ display, setDisplay ] = useState([]);
   const [ query, setQuery ] = useState("");
   // API call
   useEffect(() => {
     axios.get(`https://cors-anywhere.herokuapp.com/https://rickandmortyapi.com/api/character/?name=${query.toLowerCase()}`)
          .then((response) => {
            setData(response.data.results);
-           setDisplay(response.data.results);
+          //  setDisplay(response.data.results);
+         })
+         .catch((error) => {
+           console.log(error);
+           setData("");
          })
   }, [query])
   // --- Legacy search function ---
@@ -30,12 +34,12 @@ export default function CharacterList() {
   // }, [query])
   return (
     <React.Fragment>
-      <SearchForm setQuery={setQuery} query={query}/>
+      <SearchForm setQuery={setQuery}/>
       <CardContainer className='character-list'>
-        {display.length
-          ? display.map((character => {
+        {data.length
+          ? data.map((character => {
             return (
-              <CharacterCard character={character}/>
+              <CharacterCard character={character} key={character.id}/>
             )
           }))
           : <h2>No matches</h2>
